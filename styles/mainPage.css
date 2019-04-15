@@ -1,0 +1,87 @@
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+}
+.Main__header {
+    text-transform: uppercase;
+    font-family: Anklepants, sans-serif;
+    padding: 10px;
+    text-align: center;
+    font-size: 3rem;
+    background-color: lightcoral;
+    color: black;
+    text-decoration: none;
+}
+.Main__link, .Navigation__link{
+     color: black;
+     text-decoration: none;
+}
+.Navigation__link:hover {
+    color: sandybrown;
+}
+.Game {
+    padding: 5rem;
+    background-color: bisque;
+    flex-grow: 2;
+}
+.Game__StartButton {
+    display: block;
+    margin:0 auto;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    font-size: 3rem;
+}
+.Game__PriceList {
+    display: none;
+    list-style:none;
+    justify-items: stretch;
+    margin: 2rem;
+}
+.Game__PriceItem {
+    flex: 1;
+    text-align: center;
+}
+.Game__Card {
+    width: 100px;
+    height: 150px;
+}
+.Game__StockPrice{
+    font-family: Lato,monospace;
+    font-size: .85714rem;
+    white-space: nowrap;
+    font-weight: 700;
+}
+.Timer {
+    text-align: center;
+    font-size: 2rem;
+    display: none;
+}
+.Timer__time {
+    display: block;
+}
+.Timer__start{
+    font-size: 1.5rem;
+}
+.Navigation__list {
+    display: flex;
+    list-style:none;
+    justify-items: stretch;
+    background-color: aquamarine;
+    margin:0;
+}
+.Navigation__item {
+    flex: 1;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-family: sans;
+}

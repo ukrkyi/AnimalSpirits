@@ -3,54 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Animal Spirits</title>
-    <style>
-        header {
-            text-transform: uppercase;
-            font-family: Anklepants, sans-serif;
-            padding: 10px;
-            text-align: center;
-            font-size: 3rem;
-            background-color: lightcoral;
-        }
-        button {
-            display: block;
-            margin:0 auto;
-            height: 300px;
-            width: 300px;
-            border-radius: 50%;
-            font-size: 3rem;
-        }
-        main {
-            padding: 5rem;
-        }
-        nav > ul {
-            display: flex;
-            list-style:none;
-            justify-items: stretch;
-            background-color: aquamarine;
-        }
-        nav > ul > li {
-            flex: 1;
-            text-align: center;
-            text-transform: uppercase;
-            padding: 15px;
-            font-size: 1.2rem;
-            font-family: sans;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/mainPage.css">
 </head>
 <body>
-<header>
-    <img src="#" />Animal Spirits
+<a href="/" class="Main__link">
+<header class="Main__header">
+    <img src="#" class="Main__logo"/>Animal Spirits
 </header>
-<main>
-    <button onclick="alert('You lost')">Play</button>
+</a>
+<main class="Game">
+    <button class="Game__StartButton" onclick="this.style.display = 'none'; this.nextElementSibling.style.display='flex'; this.nextElementSibling.nextElementSibling.style.display='block';">Play</button>
+    <ul class="Game__PriceList">
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">1</div></li>
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">2</div></li>
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">3</div></li>
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">4</div></li>
+    </ul>
+    <div class="Timer">
+        <span class="Timer__time">
+            06:00
+        </span>
+        <button class="Timer__start">
+            Start
+        </button>
+    </div>
 </main>
-<nav>
-    <ul>
-        <li>Про гру</li>
-        <li>Правила</li>
-        <li>Про нас</li>
+<nav class="Navigation">
+    <ul class="Navigation__list">
+        <li class="Navigation__item"><a class="Navigation__link" href="#">Про гру</a></li>
+        <li class="Navigation__item"><a class="Navigation__link" href="#">Правила</a></li>
+        <li class="Navigation__item"><a class="Navigation__link" href="#">Про нас</a></li>
     </ul>
 </nav>
 </body>
