@@ -1,0 +1,15 @@
+{% extends 'animalSpirits/base.html' %}
+{% block title %}Animal Spirits{% endblock %}
+
+{% block body %}
+<main class="Game">
+    <a class="Game__StartButton" href="{% url 'animalSpirits:timer' %}">Play</a>
+</main>
+<nav class="Navigation">
+    <ul class="Navigation__list">
+        <li class="Navigation__item"><a class="Navigation__link" href="{% url 'animalSpirits:about' %}">Про гру</a></li>
+        <li class="Navigation__item"><a class="Navigation__link" href="{% url 'animalSpirits:rules' %}">Правила</a></li>
+        <li class="Navigation__item"><a class="Navigation__link" href="{% url 'animalSpirits:aboutUs' %}">Про нас</a></li>
+    </ul>
+</nav>
+{% endblock %}

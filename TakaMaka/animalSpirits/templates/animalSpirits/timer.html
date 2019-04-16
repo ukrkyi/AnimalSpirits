@@ -1,0 +1,22 @@
+{% extends 'animalSpirits/base.html' %}
+{% block title %}Timer{% endblock %}
+
+{% block body %}
+    <ul class="Game__PriceList">
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">1</div></li>
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">2</div></li>
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">3</div></li>
+        <li class="Game__PriceItem"><img class="Game__Card" /><div class="Game__StockPrice">4</div></li>
+    </ul>
+    <div class="Timer">
+        <span class="Timer__time">
+            06:00
+        </span>
+        <button class="Timer__start">
+            Start
+        </button>
+    </div>
+    {% load static %}
+    <script src="{% static 'animalSpirits/js/index.js' %}" type="module"></script>
+{% endblock %}
+

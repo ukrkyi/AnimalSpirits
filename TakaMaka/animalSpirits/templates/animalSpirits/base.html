@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'animalSpirits/index.css' %}">
+    <link rel="stylesheet" href="{% static 'animalSpirits/MainPage.css' %}">
+    <link rel="stylesheet" href="{% static 'animalSpirits/myChart.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Animal Spirits</h1>
+    </header>
+
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
