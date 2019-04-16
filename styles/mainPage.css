@@ -9,6 +9,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+@font-face {
+    font-family: "Anklepants";
+    src: url("anklepants.ttf");
+}
 .Main__header {
     text-transform: uppercase;
     font-family: Anklepants, sans-serif;
