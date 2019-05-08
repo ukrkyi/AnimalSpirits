@@ -10,6 +10,10 @@ body {
     background-color: #ba0018;
     font-family: "Barlow", sans-serif;
 }
+@font-face {
+    font-family: "Anklepants";
+    src: url("anklepants.ttf");
+}
 .Main__header {
     text-transform: uppercase;
     font-family: Anklepants, sans-serif;
@@ -52,6 +56,7 @@ body {
     list-style:none;
     justify-items: stretch;
     margin: 2rem;
+    padding: 0;
 }
 .Game__PriceItem {
     flex: 1;
@@ -88,6 +93,7 @@ body {
     list-style:none;
     justify-items: stretch;
     margin:0;
+    padding: 0;
 }
 .Navigation__item {
     flex: 1;
