@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'aboutUs/', views.aboutUs, name='aboutUs'),
     url(r'rules/', views.rules, name='rules'),
     url(r'timer/', views.timer, name='timer'),
+    url(r'evaluation/', views.evaluate, name='evaluation'),
 ]
