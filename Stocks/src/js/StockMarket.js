@@ -66,4 +66,8 @@ export class StockMarket {
             }
         })
     }
+    
+    getPrices(){
+        return map((x) => (x[1]), this.prices);
+    }
 }

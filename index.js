@@ -12,7 +12,7 @@ document.body.addEventListener('click', ev => {
         market = new StockMarket(["Bear", "Grills"], document.body.querySelector(".Game__market-container"), ["./Stocks/src/img/50-x-50-icon-28.jpg.png",
             "./Stocks/src/img/50-x-50-icon-28.jpg.png"]);
         timer = new GameTimer(document.body.querySelector(".Game__timer-place"));
-        console.log(document.body.querySelector(".Timer").style);
+        console.log(market.getPrices());
     }
 });
 
