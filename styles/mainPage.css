@@ -41,10 +41,12 @@ body {
     color: sandybrown;
 }
 .Game {
-    padding: 2rem 5rem;
+    padding: 1rem 5rem;
     flex-grow: 2;
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .Game__StartButton {
     color: #A16817;
