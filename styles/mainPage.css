@@ -7,7 +7,6 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #ba0018;
     font-family: "Barlow", sans-serif;
 }
 @font-face {
@@ -24,19 +23,31 @@ body {
     display: flex;
     justify-content: space-between;
 }
-.Main__link, .Navigation__link{
-    color: #fff;
+.Main__link{
+    color: #2D8E35;
     text-decoration: none;
+}
+.Navigation__link{
+    color: #2D8E35;
+    text-decoration: none;
+}
+.Navigation__link--blue{
+    color: #164E6B;
+}
+.Navigation__link--purple{
+    color: #4F297D;
 }
 .Navigation__link:hover {
     color: sandybrown;
 }
 .Game {
-    padding: 5rem;
+    padding: 2rem 5rem;
     flex-grow: 2;
+    display: flex;
+    flex-direction: column;
 }
 .Game__StartButton {
-    color: #ba0018;
+    color: #A16817;
     display: block;
     margin: 0 auto;
     margin-top: 2rem;
@@ -45,11 +56,6 @@ body {
     border-radius: 50%;
     font-size: 3rem;
 
-}
-.Game__StartButton:hover{
-    background-color: transparent;
-    color: white;
-    border: 1px;
 }
 .Game__PriceList {
     display: none;
@@ -67,7 +73,7 @@ body {
     height: 150px;
 }
 .Game__name{
-    color: #fff;
+    color:  #CD1D1D;
     font-size: 6rem;
     margin: auto 0;
     text-align: center;
@@ -78,10 +84,14 @@ body {
     white-space: nowrap;
     font-weight: 700;
 }
-.Timer {
+.Game__market-container{
+    margin: 0 auto;
+    text-align: center;
+}
+.Game__timer-place {
     text-align: center;
     font-size: 2rem;
-    display: none;
+    margin-top: 2rem;
 }
 .Timer__time {
     display: block;
@@ -102,5 +112,4 @@ body {
     display: inline-block;
     padding: 15px;
     font-size: 1.2rem;
-    font-family: sans;
 }
