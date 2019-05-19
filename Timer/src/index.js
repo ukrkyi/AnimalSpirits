@@ -9,8 +9,8 @@ function htmlToElement(html) {
 class GameTimer {
     constructor(container) {
         this.current_market_waits = true;
-        this.waitForMarket = 0.1;
-        this.marketTime = 0.05;
+        this.waitForMarket = 6;
+        this.marketTime = 3;
         this.container = container;
         this.render();
         this.timer = null;
