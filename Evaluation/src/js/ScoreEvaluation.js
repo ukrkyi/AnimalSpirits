@@ -1,3 +1,20 @@
+function find_distinct(matrix, used) {
+    let i = used.length;
+    if (i === matrix.length)
+        return used;
+    for (let j = 0; j < matrix[i].length; j++) {
+        if (!used.includes(j) && matrix[i][j] > 0) {
+            used.push(j);
+            let res = find_distinct(matrix, used);
+            if (res.length)
+                return res;
+            else
+                used.pop();
+        }
+    }
+    return [];
+}
+
 export class ScoreEvaluation {
     constructor(container, market, coeffs, images) {
         this.container = container;
@@ -73,6 +90,12 @@ export class ScoreEvaluation {
         ind = reduction.indexOf(true);
         if (ind !== -1) {
             let sum = prices.reduce((sum, el) => sum + el * this.coeffs[2], 0) + this.calc_rest(matrix.map(row => row.map((el, cur) => (cur === ind ? el - 1 : el))), prices);
+            if (sum > max_sum)
+                max_sum = sum;
+        }
+        let coeffs = find_distinct(matrix, []);
+        if (coeffs.length) {
+            let sum = prices.reduce((sum, el) => sum + el * this.coeffs[3], 0) + this.calc_rest(matrix.map((row, nrow) => row.map((el, cur) => (cur === coeffs[nrow] ? el - 1 : el))), prices);
             if (sum > max_sum)
                 max_sum = sum;
         }

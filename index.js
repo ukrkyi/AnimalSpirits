@@ -22,7 +22,7 @@ document.body.addEventListener('click', ev => {
             ev.target.style.display = "none";
             //document.body.querySelector(".Game__market-container").style.display ="none";
             document.body.querySelector(".Game__timer-place").style.display = "none";
-            evaluation = new ScoreEvaluation(document.body.querySelector(".Evaluation"), market, [5, 4, 3],
+            evaluation = new ScoreEvaluation(document.body.querySelector(".Evaluation"), market, [5, 3, 3, 2],
                 Array.from({length: 4}, (_, i) =>
                     Array.from({length: 5}, (_, j) => "./Evaluation/src/img/row-" + (i+1) + "-col-" + (j+1) + ".png"))
                     .concat([Array(5).fill("./Evaluation/src/img/icon.png")]));
