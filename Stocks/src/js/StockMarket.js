@@ -16,7 +16,7 @@ function stockToArticle(name, price, image) {
 
 export class StockMarket {
     constructor(stocks, parent, images) {
-        this.prices = zip(stocks, generateNormal(stocks.length, 3.5, 0.6454972243679028).map((x) => (roundToDecimalPl(x, 1))));
+        this.prices = zip(stocks, generateNormal(stocks.length, 3.5, 0.6454972243679028).map((x) => (roundToDecimalPl(x, 0))));
         this.parent = parent;
         this.images = images;
         this.render();
@@ -25,7 +25,7 @@ export class StockMarket {
 
     changePrices() {
         const add_delta = (x) => {
-            let result = roundToDecimalPl(generateNormal(1, 0.000, 0.5)[0] + x, 1);
+            let result = roundToDecimalPl(generateNormal(1, 0.000, 0.5)[0] + x, 0);
             return result > 1 ? result : 1.0;
         };
         const addDeltaToSecond = (x) => ([x[0], add_delta(x[1])]);
