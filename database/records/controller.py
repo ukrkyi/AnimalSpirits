@@ -27,4 +27,5 @@ def get_record(record_id):
     if existing is None:
         abort(404)
     result = dict(zip(cursor.column_names, existing))
+    print(result)
     return jsonify(result), 200
