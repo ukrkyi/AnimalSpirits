@@ -36,16 +36,12 @@ def create_game():
     test_id = get_attr(request.json, 'id')
     if test_id:
         abort(422)
-    winner_id = get_attr(request.json, 'winner_id')
     rounds = get_attr(request.json, 'rounds')
-    if type(winner_id) is not int or winner_id < 0:
+    if rounds is not None and (type(rounds) is not int or rounds < 0):
         abort(422)
-    elif type(rounds) is not int or rounds < 0:
-        abort(422)
-    print(winner_id, rounds)
     try:
         cursor.execute(
-            f"INSERT INTO students (winner_id ,rounds) VALUES ('{winner_id}','{rounds}');")
+            f"INSERT INTO games ({'rounds' if rounds is not None else ''}) VALUES ({rounds if rounds is not None else ''});")
     except mysql.connector.Error as error:
         print(error)
         abort(422)
