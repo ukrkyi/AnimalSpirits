@@ -15,7 +15,7 @@ document.addEventListener('click', evt => {
         if(is_valid_tr(id)){
             window.location.replace("./index.html");
         }else{
-            alert("Wrong_id")
+            alert("Wrong_id");
         }
     }
 
