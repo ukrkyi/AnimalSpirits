@@ -4,9 +4,9 @@ import mysql.connector
 from flask import abort
 
 host = os.environ.get('DB_HOST', 'localhost')
-mydb = mysql.connector.connect(host=host, user='gamer',
-                               password='gamer',
-                               database='game',
+mydb = mysql.connector.connect(host=host, user='animal',
+                               password='shit',
+                               database='animalspirits',
                                auth_plugin='mysql_native_password')
 cursor = mydb.cursor()
 
