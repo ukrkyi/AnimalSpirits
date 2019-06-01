@@ -4,3 +4,4 @@ package-lock.json
 *.css
 dist/main.js
 node_modules/.cache
+*.pyc
