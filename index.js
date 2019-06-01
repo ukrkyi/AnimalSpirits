@@ -52,6 +52,8 @@ function show(what, ...els) {
     els.forEach(el => el.style.display = what);
 }
 
+let id = 0;
+
 async function gameProcess() {
     market = new StockMarket(
         ["Кінь", "Ведмідь", "Вівця", "Кабан", "Бик"],
@@ -65,14 +67,14 @@ async function gameProcess() {
     let next_step = true;
     do {
         if (!waitMarket) {
-            timer.setTime("Bidding time!");
+            timer.setTime("Market opens!");
             button.innerText = "Start bidding";
         } else {
             timer.stopTimer();
             button.innerText = "Wait for market";
         }
         show("block", button);
-        if (waitMarket)
+        if (!waitMarket)
             show("block", finButton);
         next_step = await waitButtons(button, finButton);
         hide(button, finButton);
@@ -82,7 +84,41 @@ async function gameProcess() {
     } while (next_step);
     hide(timerPlace);
     let gameInfo = document.body.querySelector(".Game__Process-info");
-    gameInfo.innerText = "Your PIN is 123";
+    gameInfo.innerText = "Waiting for server response...";
     show("block", gameInfo);
+    let gameCreated = await (await fetch("http://127.0.0.1:5000/games/", {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+        method: "POST"
+    })).json();
+    id = gameCreated["id"];
+    let waiter = Array(5);
+    for (let i = 1; i <=5; i++) {
+        waiter[i] = fetch("http://127.0.0.1:5000/prices/", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                game_id: id,
+                type_id: i,
+                round: 1,
+                price : market.prices[i - 1][1],
+            }),
+            method: "POST"
+        });
+    }
+    await Promise.all(waiter);
+    gameInfo.innerText = "Your PIN is " + gameCreated["id"];
+    // TODO display results
 }
 
+window.addEventListener('beforeunload', async (event) => {
+    if (id !== 0) {
+        await fetch(`http://127.0.0.1:5000/games/${id}`, {method: "DELETE"});
+    }
+
+    // Chrome requires returnValue to be set.
+    event.returnValue = undefined;
+});
