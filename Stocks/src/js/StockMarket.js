@@ -20,7 +20,6 @@ export class StockMarket {
         this.parent = parent;
         this.images = images;
         this.render();
-        this.initHandlers();
     }
 
     changePrices() {
@@ -35,7 +34,6 @@ export class StockMarket {
     toHtml() {
         let base = htmlToElement(`<div class="Stock_price">
             <div class="Stock_price__stocks"></div>
-            <button class="Stock_price__reload">Reload</button>
         </div>`);
         let prices = this.prices;
         prices = zip(prices, this.images);
@@ -57,14 +55,6 @@ export class StockMarket {
 
     render() {
         this.parent.appendChild(this.toHtml(["a", "c"]));
-    }
-
-    initHandlers() {
-        this.parent.addEventListener('click', ev => {
-            if (ev.target.matches('.Stock_price__reload')) {
-                this.reload();
-            }
-        })
     }
     
     getPrices(){
