@@ -20,12 +20,10 @@ function generateStopButton() {
     return stopGame;
 }
 
-document.body.addEventListener('click', ev => {
-    if (ev.target.matches('.Game__StartButton')) {
+document.body.querySelector(".Game__StartButton").addEventListener('click', ev => {
         document.body.querySelector(".Game__StartButton").style.display = 'none';
         document.body.querySelector(".Game__name").style.display = 'none';
         gameProcess();
-    }
 });
 
 async  function waitButtons(button_next, button_finish) {
