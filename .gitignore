@@ -2,6 +2,6 @@
 package-lock.json
 *.css.map
 *.css
-dist/main.js
+dist/
 node_modules/.cache
 *.pyc
