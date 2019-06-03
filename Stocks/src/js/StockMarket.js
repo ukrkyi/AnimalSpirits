@@ -2,11 +2,11 @@ import {generateNormal} from "./normal_distribution";
 import {htmlToElement, roundToDecimalPl} from "./helper_functions";
 import {flatten, map, zip} from 'ramda';
 
-function stockToArticle(name, price, image) {
+function stockToArticle(stock, price, image) {
     return htmlToElement(`<article class="Stock_price__stock">
         <img alt="Stock logo" class="Stock_price__stock-logo" src="${image}">
         <h1 class="Stock_price__name">
-        ${name}
+        ${stock["name"]}
         </h1>
         <span class="Stock_price__price">
         ${price}
@@ -59,5 +59,8 @@ export class StockMarket {
     
     getPrices(){
         return map((x) => (x[1]), this.prices);
+    }
+    getPricesOfCards(){
+        return this.prices;
     }
 }

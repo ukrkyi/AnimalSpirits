@@ -1,7 +1,6 @@
 from flask import Flask
 
-
-app = Flask(__name__,static_url_path='/static')
+app = Flask(__name__, static_url_path='/static')
 
 from colors.controller import colors
 from card_types.controller import card_types
@@ -10,6 +9,8 @@ from cards.controller import cards
 from records.controller import records
 from users.controller import users
 from games.controller import games
+from prices.controller import prices
+
 
 
 app.register_blueprint(colors, url_prefix="/colors")
@@ -19,8 +20,9 @@ app.register_blueprint(cards, url_prefix="/cards")
 app.register_blueprint(records, url_prefix="/records")
 app.register_blueprint(users, url_prefix="/users")
 app.register_blueprint(games, url_prefix="/games")
+app.register_blueprint(prices, url_prefix = '/prices')
 
 
 if __name__ == '__main__':
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-    app.run(debug = True)
+    app.run(debug=True)
