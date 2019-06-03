@@ -30,10 +30,8 @@ const hide_evaluation = () => {
 
 const get_prices = async (game_id) => {
     game_id = parseInt(game_id);
-    let all_prices = await (await fetch(`http://${get_location()}:5000/prices/`)).json();
-    const select_by_id = pipe(filter((x) => (x["game_id"] === game_id)),
-        map((x) => (x["price"])));
-    all_prices = select_by_id(all_prices);
+    let all_prices = await (await fetch(`http://${get_location()}:5000/prices/${game_id}`)).json();
+    all_prices = all_prices.sort((a, b) => a["type_id"] - b["type_id"]).map((x) => (x["price"]));
     return all_prices;
 };
 
@@ -57,8 +55,8 @@ const init_and_handle_authentification = () =>{
         "        </div>\n" +
         "</main>"
 };
-const post_config = (data) => ({
-    method: 'POST',
+const post_config = (data, put = false) => ({
+    method: put ? 'PUT' : 'POST',
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -66,12 +64,16 @@ const post_config = (data) => ({
     body: JSON.stringify(data)
 });
 
+let results_sent = false;
+
 const send_results = async () => {
-    return await (await fetch(`http://${get_location()}:5000/results/`, post_config({
+    let config = post_config({
         "game_id": id,
         "nickname": nickname,
         "result": score
-    }))).json();
+    }, results_sent);
+    results_sent = true;
+    return await (await fetch(`http://${get_location()}:5000/results/`, config)).json();
 };
 
 const create_evaluation_button_and_get_result =  (evaluator, prices) => {
@@ -94,7 +96,7 @@ const calculate_player_score = async (id) => {
     let eval_container = document.createElement("div");
     eval_container.className = "Evaluation";
     document.body.appendChild(eval_container);
-    const evaluator = new ScoreEvaluation(eval_container, [5, 3, 2, 2, 1], Array.from({length: 4}, (_, i) =>
+    const evaluator = new ScoreEvaluation(eval_container, [5, 3, 3, 2], Array.from({length: 4}, (_, i) =>
         Array.from({length: 5}, (_, j) => "./Evaluation/src/img/row-" + (i + 1) + "-col-" + (j + 1) + ".png"))
         .concat([Array(5).fill("./Evaluation/src/img/icon.png")]));
     create_evaluation_button_and_get_result(evaluator, prices);

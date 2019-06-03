@@ -26,8 +26,8 @@ def get_game(game_id):
     cursor = mydb.cursor()
     try:
         cursor.execute(
-            "SELECT * from results WHERE id = {}".format(game_id))
-        existing = cursor.fetchone()
+            "SELECT * from results WHERE game_id = {}".format(game_id))
+        existing = cursor.fetchall()
     except mysql.Error as error:
         print(error)
         cursor.close()
@@ -37,7 +37,7 @@ def get_game(game_id):
         cursor.close()
         mydb.close()
         abort(404)
-    result = dict(zip(cursor.column_names, existing))
+    result = as_json(cursor, existing)
     cursor.close()
     mydb.close()
     return jsonify(result), 200

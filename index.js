@@ -129,14 +129,27 @@ async function gameProcess() {
     }
     await Promise.all(waiter);
     gameInfo.innerText = "Your PIN is " + gameCreated["id"];
-    // TODO display results
+    let data = [];
+    let table = document.body.querySelector(".Game__Process-result");
+    table.style.display = "grid";
+    do {
+        await new Promise(resolve => setTimeout(resolve, 500));
+        let results = await (await fetch(`http://${get_location()}:5000/results/${id}`)).json();
+        let added = results.filter(tested => !data.some(el => el["id"] === tested["id"]));
+        added.forEach(el => {
+            let name = document.createElement("div");
+            name.innerHTML = `${el["name"]}`;
+            let result = document.createElement("div");
+            result.innerHTML = `${el["result"]}`;
+            table.appendChild(name);
+            table.appendChild(result);
+        });
+        data.push(...added);
+    } while(1);
 }
 
 window.addEventListener('beforeunload', async (event) => {
     if (id !== 0) {
         await fetch(`http://${get_location()}:5000/games/${id}`, {method: "DELETE"});
     }
-
-    // Chrome requires returnValue to be set.
-    event.returnValue = undefined;
 });

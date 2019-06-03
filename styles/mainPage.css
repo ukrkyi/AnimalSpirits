@@ -109,6 +109,21 @@ body {
     width: 30rem;
     margin: 0.5rem;
 }
+.Game__Process-info {
+    font-size: 4rem;
+    margin: 1rem;
+}
+.Game__Process-result {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid black;
+    width: 50%;
+    font-size: 2rem;
+}
+.Game__Process-result > * {
+    border: 1px solid black;
+    text-align: center;
+}
 .Game__PriceItem {
     flex: 1;
     text-align: center;
