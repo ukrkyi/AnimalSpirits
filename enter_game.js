@@ -1,6 +1,9 @@
 import {filter, map, pipe} from 'ramda';
 import {ScoreEvaluation} from "./Evaluation/src/js/ScoreEvaluation";
 
+let nickname, id, score;
+
+
 function hide(...els) {
     els.forEach(el => el.style.display = "none");
 }
@@ -18,13 +21,11 @@ const is_valid = async (game_id) => {
         return false;
     }
 };
-const is_valid_tr = (game_id) => (true);
 
 const hide_evaluation = () => {
     hide(document.querySelector(".Evaluation"));
     hide(document.querySelector(".Eval_button"))
 };
-
 
 
 const get_prices = async (game_id) => {
@@ -37,21 +38,54 @@ const get_prices = async (game_id) => {
 };
 
 const get_id = () => {
-    return document.querySelector(".Login__text-field").value;
+    return parseInt(document.querySelector(".Login__text-field").value);
 };
-const finish_login = () => {hide(document.querySelector(".Login"));};
+const get_username = () => {
+    return document.querySelector(".User__text-field").value;
+};
+const finish_login = () => {
+    hide(document.querySelector(".Login"));
+};
 
+const init_and_handle_authentification = () =>{
+    document.body.innerHTML += "<main class=\"User\">\n" +
+        "        <div class=\"User__inputs\">\n" +
+        "            <input class=\"User__text-field\" placeholder=\"Enter your nickname\" type=\"text\">\n" +
+        "            <button class=\"User__submit-button\" type=\"button\">\n" +
+        "                Enter room\n" +
+        "            </button>\n" +
+        "        </div>\n" +
+        "</main>"
+};
+const post_config = (data) => ({
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+});
 
-const create_evaluation_button_and_get_result = (evaluator, prices, ) => {
+const send_results = async () => {
+    return await (await fetch(`http://${get_location()}:5000/results/`, post_config({
+        "game_id": id,
+        "nickname": nickname,
+        "result": score
+    }))).json();
+};
+
+const create_evaluation_button_and_get_result =  (evaluator, prices) => {
     let evaluation_button = document.createElement("button");
     evaluation_button.className = "Eval_button";
     document.body.appendChild(evaluation_button);
-    document.addEventListener('click', evt => {
-        if(evt.target.matches(".Eval_button")){
-            console.log(evaluator.getCount(prices));
+    document.addEventListener('click', async evt =>  {
+        if (evt.target.matches(".Eval_button")) {
+            score = evaluator.getCount(prices);
+            console.log(score);
+            await send_results();
             hide_evaluation();
         }
-    });
+    })
 };
 
 
@@ -60,7 +94,7 @@ const calculate_player_score = async (id) => {
     let eval_container = document.createElement("div");
     eval_container.className = "Evaluation";
     document.body.appendChild(eval_container);
-    const evaluator = new ScoreEvaluation(eval_container, [1, 1 , 1, 1, 1],  Array.from({length: 4}, (_, i) =>
+    const evaluator = new ScoreEvaluation(eval_container, [5, 3, 2, 2, 1], Array.from({length: 4}, (_, i) =>
         Array.from({length: 5}, (_, j) => "./Evaluation/src/img/row-" + (i + 1) + "-col-" + (j + 1) + ".png"))
         .concat([Array(5).fill("./Evaluation/src/img/icon.png")]));
     create_evaluation_button_and_get_result(evaluator, prices);
@@ -69,14 +103,17 @@ const calculate_player_score = async (id) => {
 
 document.addEventListener('click', async evt => {
     if (evt.target.matches(".Login__submit-button")) {
-        const id = get_id();
+        id = get_id();
         if (await is_valid(id)) {
             finish_login();
-            await calculate_player_score(id);
-            console.log("OK");
+            init_and_handle_authentification();
         } else {
             alert("Wrong id");
         }
-    }
-});
-
+    }else if (evt.target.matches(".User__submit-button")) {
+            nickname = get_username();
+            hide(document.querySelector(".User"));
+            await calculate_player_score(id);
+            console.log("OK");
+        };
+    });
