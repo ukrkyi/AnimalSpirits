@@ -10,6 +10,7 @@ from records.controller import records
 from users.controller import users
 from games.controller import games
 from prices.controller import prices
+from results.controller import results
 
 
 
@@ -21,6 +22,7 @@ app.register_blueprint(records, url_prefix="/records")
 app.register_blueprint(users, url_prefix="/users")
 app.register_blueprint(games, url_prefix="/games")
 app.register_blueprint(prices, url_prefix = '/prices')
+app.register_blueprint(results, url_prefix = '/results')
 
 
 if __name__ == '__main__':
