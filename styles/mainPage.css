@@ -118,7 +118,9 @@ body {
     grid-template-columns: repeat(2, 1fr);
     border: 1px solid black;
     width: 50%;
+    min-width: 500px;
     font-size: 2rem;
+    margin: auto;
 }
 .Game__Process-result > * {
     border: 1px solid black;

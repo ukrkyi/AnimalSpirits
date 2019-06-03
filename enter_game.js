@@ -86,6 +86,28 @@ const create_evaluation_button_and_get_result =  (evaluator, prices) => {
             console.log(score);
             await send_results();
             hide_evaluation();
+            let data = [];
+            let table = document.createElement("div");
+            table.className = "Game__Process-result";
+            table.style.display = "grid";
+            document.body.appendChild(table);
+            do {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                let results = await (await fetch(`http://${get_location()}:5000/results/${id}`)).json();
+                let added = results.filter(tested => !data.some(el => el["id"] === tested["id"]));
+                added.forEach(el => {
+                    let name = document.createElement("div");
+                    name.innerHTML = `${el["name"]}`;
+                    let result = document.createElement("div");
+                    result.innerHTML = `${el["result"]}`;
+                    if (el["name"] === nickname) {
+                        name.style.background = result.style.background = "yellow";
+                    }
+                    table.appendChild(name);
+                    table.appendChild(result);
+                });
+                data.push(...added);
+            } while(1);
         }
     })
 };
@@ -99,7 +121,7 @@ const calculate_player_score = async (id) => {
     const evaluator = new ScoreEvaluation(eval_container, [5, 3, 3, 2], Array.from({length: 4}, (_, i) =>
         Array.from({length: 5}, (_, j) => "./Evaluation/src/img/row-" + (i + 1) + "-col-" + (j + 1) + ".png"))
         .concat([Array(5).fill("./Evaluation/src/img/icon.png")]));
-    create_evaluation_button_and_get_result(evaluator, prices);
+    await create_evaluation_button_and_get_result(evaluator, prices);
 };
 
 
@@ -117,5 +139,5 @@ document.addEventListener('click', async evt => {
             hide(document.querySelector(".User"));
             await calculate_player_score(id);
             console.log("OK");
-        };
+        }
     });
