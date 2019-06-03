@@ -1,7 +1,7 @@
 import mysql.connector
 from flask import Blueprint, abort, jsonify, request
 
-from connection import cursor, as_json, get_attr, mydb
+from connection import as_json, get_attr, get_conn
 
 users = Blueprint('users', __name__)
 
