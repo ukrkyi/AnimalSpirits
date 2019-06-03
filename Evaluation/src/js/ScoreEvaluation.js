@@ -16,10 +16,9 @@ function find_distinct(matrix, used) {
 }
 
 export class ScoreEvaluation {
-    constructor(container, market, coeffs, images) {
+    constructor(container, coeffs, images) {
         this.container = container;
         this.data = images.map(img_arr => img_arr.map(img => ({image: img, counter: 0})));
-        this.market = market;
         this.coeffs = coeffs;
         this.render();
         this.initHandlers();
@@ -30,35 +29,27 @@ export class ScoreEvaluation {
             (data_array, i) => data_array.map(
                 (element, j) => `<div class="Evaluation__card" data-row="${i}" data-column="${j}">
 <img class="Evaluation__card-image" src="${element.image}" />
-<button class="Evaluation__card-button">-</button>
-<div class="Evaluation__card-count">${element.counter}</div>
-<button class="Evaluation__card-button">+</button></div>`)
+<div class="Evaluation__card-count">${element.counter}</div></div>`)
                 .join(''))
             .join('')
     }
 
     render() {
         this.container.innerHTML = `
-        ${this.renderCards()}
-      <button class="Evaluation__button">Evaluate</button>
-  `
+        ${this.renderCards()}  `
     }
 
     initHandlers() {
         this.container.addEventListener('click', ev => {
-            if (ev.target.matches('.Evaluation__card')) {
-                let container = ev.target.parentElement;
-                let row = Number(container.getAttribute("data-row"));
-                let col = Number(container.getAttribute("data-column"));
+            if (ev.target.matches('.Evaluation__card') || ev.target.matches('.Evaluation__card *')) {
+                let counter = ev.target.matches('.Evaluation__card') ? ev.target : ev.target.parentElement;
+                let row = Number(counter.getAttribute("data-row"));
+                let col = Number(counter.getAttribute("data-column"));
                 let el = this.data[row][col];
                 if (el.counter < 5) {
                     el.counter++;
                 }
-                container.getElementsByClassName("Evaluation__card-count")[0].innerHTML = el.counter;
-            }
-
-            if (ev.target.matches(".Evaluation__button")) {
-                alert(this.getCount(this.market.getPrices()).toFixed(1));
+                counter.getElementsByClassName("Evaluation__card-count")[0].innerHTML = el.counter;
             }
         })
     }

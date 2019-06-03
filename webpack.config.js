@@ -5,5 +5,5 @@ module.exports = {
         "main":"./index.js",
         "enter": "./enter_game.js"
     },
-    mode: 'production',
+    mode: 'development',
 };

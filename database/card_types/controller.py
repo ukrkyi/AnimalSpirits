@@ -10,7 +10,9 @@ card_types = Blueprint('card_types', __name__)
 def list_types():
     try:
         mydb = get_conn()
+        print("Before error")
         cursor = mydb.cursor()
+        print("After error")
         cursor.execute("select * from types")
         result = jsonify(as_json(cursor, cursor.fetchall())), 200
         cursor.close()
