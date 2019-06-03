@@ -12,7 +12,7 @@ def list_types():
         mydb = get_conn()
         cursor = mydb.cursor()
         cursor.execute("select * from types")
-        result = jsonify(as_json(cursor)), 200
+        result = jsonify(as_json(cursor, cursor.fetchall())), 200
         cursor.close()
         mydb.close()
         return result
