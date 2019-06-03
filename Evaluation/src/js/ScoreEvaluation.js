@@ -46,15 +46,13 @@ export class ScoreEvaluation {
 
     initHandlers() {
         this.container.addEventListener('click', ev => {
-            if (ev.target.matches('.Evaluation__card-button')) {
+            if (ev.target.matches('.Evaluation__card')) {
                 let container = ev.target.parentElement;
                 let row = Number(container.getAttribute("data-row"));
                 let col = Number(container.getAttribute("data-column"));
                 let el = this.data[row][col];
-                if (ev.target.innerText==="+" && el.counter < 5) {
+                if (el.counter < 5) {
                     el.counter++;
-                } else if (ev.target.innerText==="-" && el.counter > 0) {
-                    el.counter--;
                 }
                 container.getElementsByClassName("Evaluation__card-count")[0].innerHTML = el.counter;
             }
