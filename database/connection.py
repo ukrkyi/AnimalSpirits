@@ -4,21 +4,15 @@ import mysql.connector
 from flask import abort
 
 host = os.environ.get('DB_HOST', 'localhost')
-mydb = mysql.connector.connect(host=host, user='animal',
+def get_conn():
+    return mysql.connector.connect(host=host, user='animal',
                                password='shit',
                                database='animalspirits',
                                auth_plugin='mysql_native_password')
-cursor = mydb.cursor()
 
 
-def as_json(curs):
-    row_headers = [x[0] for x in
-                   curs.description]
-    rv = curs.fetchall()
-    json_data = []
-    for result in rv:
-        json_data.append(dict(zip(row_headers, result)))
-    return json_data
+def as_json(cursor, data):
+    return [dict(zip(cursor.column_names, el)) for el in data]
 
 
 def get_attr(obj, key, can_be_null=False):
