@@ -82,7 +82,7 @@ async function gameProcess() {
     market = new StockMarket(
         names,
         document.body.querySelector(".Game__market-container"),
-        Array.from({length: 4}, (_, i) => "./Evaluation/src/img/row-" + (i + 1) + "-col-1.png").concat(["./Evaluation/src/img/icon.png"]));
+        Array.from({length: 5}, (_, i) => "./Evaluation/src/img/row-" + (i + 1) + "-col-1.jpg"));
     let timerPlace = document.body.querySelector(".Game__timer-place");
     timer = new GameTimer(timerPlace);
     let button = document.body.querySelector(".Game__Process-next_step");

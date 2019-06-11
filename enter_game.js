@@ -118,9 +118,8 @@ const calculate_player_score = async (id) => {
     let eval_container = document.createElement("div");
     eval_container.className = "Evaluation";
     document.body.appendChild(eval_container);
-    const evaluator = new ScoreEvaluation(eval_container, [5, 3, 3, 2], Array.from({length: 4}, (_, i) =>
-        Array.from({length: 5}, (_, j) => "./Evaluation/src/img/row-" + (i + 1) + "-col-" + (j + 1) + ".png"))
-        .concat([Array(5).fill("./Evaluation/src/img/icon.png")]));
+    const evaluator = new ScoreEvaluation(eval_container, [5, 3, 3, 2], Array.from({length: 5}, (_, i) =>
+        Array.from({length: 5}, (_, j) => "./Evaluation/src/img/row-" + (i + 1) + "-col-" + (j + 1) + ".jpg")));
     await create_evaluation_button_and_get_result(evaluator, prices);
 };
 

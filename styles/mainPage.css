@@ -177,3 +177,8 @@ body {
 .Game__Process > *{
     display: none;
 }
+.Logo {
+    width: 4rem;
+    max-height: 2rem;
+    object-fit: cover;
+}
